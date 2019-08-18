@@ -14,10 +14,9 @@ import { WelcomeComponent } from './welcome/welcome.component';
 import { FormsModule } from '@angular/forms';
 import { HeaderComponent } from './navigation/header/header.component';
 import { SidenavListItemComponent } from './navigation/sidenav-list-item/sidenav-list-item.component';
-import { AuthService } from './auth/auth.service';
+import { StopTrainingComponent } from './training/current-training/stop-training.component';
 
 @NgModule({
-  declarations: [
     AppComponent,
     SignupComponent,
     LoginComponent,
@@ -27,7 +26,8 @@ import { AuthService } from './auth/auth.service';
     PastTrainingsComponent,
     WelcomeComponent,
     HeaderComponent,
-    SidenavListItemComponent
+    SidenavListItemComponent,
+    StopTrainingComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +36,13 @@ import { AuthService } from './auth/auth.service';
     MaterialModule,
     FormsModule
   ],
+<<<<<<< HEAD
   providers: [AuthService],
   bootstrap: [AppComponent]
+=======
+  providers: [],
+  bootstrap: [AppComponent],
+  entryComponents: [StopTrainingComponent]
+>>>>>>> feature/training
 })
 export class AppModule { }

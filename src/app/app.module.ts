@@ -11,9 +11,11 @@ import { NewTrainingsComponent } from './training/new-trainings/new-trainings.co
 import { CurrentTrainingComponent } from './training/current-training/current-training.component';
 import { PastTrainingsComponent } from './training/past-trainings/past-trainings.component';
 import { WelcomeComponent } from './welcome/welcome.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';git 
 import { HeaderComponent } from './navigation/header/header.component';
 import { SidenavListItemComponent } from './navigation/sidenav-list-item/sidenav-list-item.component';
+import { AuthService } from './auth/auth.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,7 +36,7 @@ import { SidenavListItemComponent } from './navigation/sidenav-list-item/sidenav
     MaterialModule,
     FormsModule
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

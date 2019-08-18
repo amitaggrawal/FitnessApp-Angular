@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../auth.service';
 
 
 @Component({
@@ -10,7 +11,7 @@ export class SignupComponent implements OnInit {
 
   minDate;
 
-  constructor() { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit() {
     this.minDate = new Date();
@@ -18,6 +19,6 @@ export class SignupComponent implements OnInit {
   }
 
   signup(formValue){
-    console.log(formValue);
+    this.authService.registerUser(formValue);
   }
 }

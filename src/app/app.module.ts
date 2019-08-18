@@ -12,6 +12,7 @@ import { CurrentTrainingComponent } from './training/current-training/current-tr
 import { PastTrainingsComponent } from './training/past-trainings/past-trainings.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { FormsModule } from '@angular/forms';
+import { AuthService } from './auth/auth.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,7 +31,7 @@ import { FormsModule } from '@angular/forms';
     MaterialModule,
     FormsModule
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -4,7 +4,7 @@
     (ngSubmit)="login(loginForm.value)">
 
     <mat-form-field>
-      <input type="email" matInput placeholder="Enter email ID" #email="ngModel" ngModel name="emailID" email required>
+      <input type="email" matInput placeholder="Enter email ID" #email="ngModel" ngModel name="emailID" required>
       <mat-error *ngIf="email.hasError('required')">Email is required.</mat-error>
       <mat-error *ngIf="!email.hasError('required')">Email is invalid.</mat-error>
     </mat-form-field>

@@ -15,8 +15,12 @@ import { FormsModule } from '@angular/forms';
 import { HeaderComponent } from './navigation/header/header.component';
 import { SidenavListItemComponent } from './navigation/sidenav-list-item/sidenav-list-item.component';
 import { AuthService } from './auth/auth.service';
-import {ExerciseService} from './training/exercise.service';
+import { ExerciseService } from './training/exercise.service';
 import { StopTrainingComponent } from './training/current-training/stop-training.component';
+import { AngularFireModule } from 'angularfire2';
+import { environment } from 'src/environments/environment.prod';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { AngularFireAuthModule } from 'angularfire2/auth';
 
 @NgModule({
   declarations: [
@@ -37,7 +41,10 @@ import { StopTrainingComponent } from './training/current-training/stop-training
     BrowserAnimationsModule,
     AppRoutingModule,
     MaterialModule,
-    FormsModule
+    FormsModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFirestoreModule,
+    AngularFireAuthModule
   ],
   providers: [AuthService, ExerciseService],
   bootstrap: [AppComponent],

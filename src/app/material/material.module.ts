@@ -18,7 +18,8 @@ import {
   MatDialogModule,
   MatTableModule,
   MatSortModule,
-  MatPaginatorModule
+  MatPaginatorModule,
+  MatSnackBarModule
 } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
@@ -44,7 +45,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatDialogModule,
     MatTableModule,
     MatSortModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatSnackBarModule
   ],
   exports: [
     MatButtonModule,
@@ -66,6 +68,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatTableModule,
     MatSortModule,
     MatPaginatorModule,
+    MatSnackBarModule
   ]
 })
 export class MaterialModule { }

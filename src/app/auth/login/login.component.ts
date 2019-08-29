@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { AuthData } from '../auth-data.model';
+import UIService from 'src/app/shared/ui.service';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -8,13 +10,17 @@ import { AuthData } from '../auth-data.model';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
 
   credentials: AuthData;
-
-  constructor(private authService: AuthService) { }
+  isLoading = false;
+  private loadingSubscription: Subscription;
+  constructor(private authService: AuthService, private uiService:UIService) { }
   
   ngOnInit() {
+    this.loadingSubscription = this.uiService.loadingStateChanged.subscribe((state) => {
+      this.isLoading = state;
+    });
   }
 
   login(formValue){
@@ -24,5 +30,11 @@ export class LoginComponent implements OnInit {
     }
    
     this.authService.loginUser(this.credentials);
+  }
+
+  ngOnDestroy(){
+    if(this.loadingSubscription != null){
+      this.loadingSubscription.unsubscribe();
+    }
   }
 }

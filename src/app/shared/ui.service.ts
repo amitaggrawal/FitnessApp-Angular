@@ -1,10 +1,9 @@
 import { Subject } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material';
-import { DebugRenderer2 } from '@angular/core/src/view/services';
 
 @Injectable()
-export default class UIService{
+export class UIService{
     loadingStateChanged = new Subject<boolean>();
 
     constructor(private snackbar: MatSnackBar){}

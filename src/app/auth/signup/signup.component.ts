@@ -1,40 +1,30 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import * as fromRoot from '../../app.reducer';
+import { Store } from '@ngrx/store';
+
 import { AuthService } from '../auth.service';
-import UIService from 'src/app/shared/ui.service';
-import { Subscription } from 'rxjs';
-
-
 
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.css']
 })
-export class SignupComponent implements OnInit, OnDestroy {
+export class SignupComponent implements OnInit {
 
   minDate;
+  isLoading$: Observable<boolean>;
 
-  isLoading = false;
-  private loadingSubscription: Subscription;
-
-  constructor(private authService: AuthService, private uiService:UIService) { }
+  constructor(private authService: AuthService, private store: Store<fromRoot.State>) { }
 
   ngOnInit() {
+    this.isLoading$ = this.store.select(fromRoot.getIsLoading);
     this.minDate = new Date();
     this.minDate.setFullYear(this.minDate.getFullYear() - 18);
 
-    this.loadingSubscription = this.uiService.loadingStateChanged.subscribe((state) => {
-      this.isLoading = state;
-    });
   }
 
-  signup(formValue){
+  signup(formValue) {
     this.authService.registerUser(formValue);
-  }
-
-  ngOnDestroy(){
-    if(this.loadingSubscription != null){
-      this.loadingSubscription.unsubscribe();
-    }
   }
 }

@@ -11,10 +11,12 @@ import { AuthService } from './auth/auth.service';
 import { ExerciseService } from './training/exercise.service';
 import { AngularFireModule } from 'angularfire2';
 import { environment } from 'src/environments/environment.prod';
-import UIService from './shared/ui.service';
-import {AuthModule} from './auth/auth.module'
+import { UIService } from './shared/ui.service';
+import { AuthModule } from './auth/auth.module'
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { StoreModule } from '@ngrx/store';
+import { reducers } from './app.reducer';
 
 @NgModule({
   declarations: [
@@ -31,10 +33,11 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
     FlexLayoutModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
-    AuthModule
+    AuthModule,
+    StoreModule.forRoot(reducers)
   ],
   providers: [AuthService, ExerciseService, UIService],
   bootstrap: [AppComponent],
-  
+
 })
 export class AppModule { }

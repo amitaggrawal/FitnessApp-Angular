@@ -1,6 +1,8 @@
 import { Component, OnInit, EventEmitter, Output, OnDestroy } from '@angular/core';
 import { AuthService } from 'src/app/auth/auth.service';
-import { Subscription } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
+import * as fromRoot from '../../app.reducer';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-sidenav-list-item',
@@ -10,27 +12,28 @@ import { Subscription } from 'rxjs';
 export class SidenavListItemComponent implements OnInit, OnDestroy {
 
   @Output() closeSidenav = new EventEmitter<void>()
-  authSubscription:Subscription;
-  isAuth= false;
- 
-  constructor(private authService: AuthService) { }
+  authSubscription: Subscription;
+  isAuth: Observable<boolean>; // = false;
+
+  constructor(private authService: AuthService, private store: Store<fromRoot.State>) { }
 
   ngOnInit() {
-    this.authSubscription = this.authService.authChange.subscribe((authData) => {
-      this.isAuth = authData;
-    });
+    this.isAuth = this.store.select(fromRoot.getIsAuthenticated);
+    // this.authSubscription = this.authService.authChange.subscribe((authData) => {
+    //   this.isAuth = authData;
+    // });
   }
 
-  onClose(){
+  onClose() {
     this.closeSidenav.emit();
   }
 
-  onLogout(){
+  onLogout() {
     this.onClose();
     this.authService.logout();
   }
 
-  ngOnDestroy(){
+  ngOnDestroy() {
     this.authSubscription.unsubscribe();
   }
 }
